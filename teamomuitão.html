@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vai se foder, Marla</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700;900&display=swap');
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            height: 100vh;
+            overflow: hidden;
+            font-family: 'Poppins', sans-serif;
+            color: #fff;
+            background: #000;
+        }
+
+        #page1, #page2 {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 1.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        #page1 {
+            background: linear-gradient(145deg, #8f0000, #c8102e, #8f0000);
+            z-index: 1;
+        }
+
+        #page2 {
+            background: linear-gradient(145deg, #3d0000, #7a0000);
+            display: none;
+            z-index: 2;
+        }
+
+        /* Vinheta sutil */
+        .vignette {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            box-shadow: inset 0 0 120px rgba(0,0,0,0.7);
+            pointer-events: none;
+            z-index: 3;
+        }
+
+        .container {
+            text-align: center;
+            z-index: 10;
+            max-width: 90%;
+            padding: 40px 20px;
+        }
+
+        .big-heart {
+            font-size: 12rem;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            filter: drop-shadow(0 0 50px rgba(255, 40, 40, 0.85));
+            animation: heartbeat 1.4s infinite ease-in-out;
+        }
+
+        .big-heart:hover {
+            transform: scale(1.22) rotate(12deg);
+        }
+
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.12); }
+        }
+
+        h1 {
+            font-size: 5.2rem;
+            font-weight: 900;
+            letter-spacing: 8px;
+            text-transform: uppercase;
+            margin: 25px 0 8px;
+            text-shadow: 0 4px 20px rgba(255,255,255,0.3),
+                         0 0 30px rgba(255, 30, 30, 0.6);
+        }
+
+        .subtitle {
+            font-size: 2.6rem;
+            font-weight: 700;
+            margin-bottom: 40px;
+            opacity: 0.95;
+        }
+
+        p {
+            font-size: 1.85rem;
+            font-weight: 500;
+            line-height: 1.45;
+            margin: 22px 0;
+        }
+
+        .floating {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            pointer-events: none;
+            z-index: 2;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Página 1 -->
+    <div id="page1">
+        <div class="floating" id="hearts1"></div>
+        <div class="vignette"></div>
+        <div class="container">
+            <div id="clickHeart" class="big-heart">❤️</div>
+            <h1>TE AMO</h1>
+            <p class="subtitle">MARLA</p>
+            <p>Clica no coração aí amor meu...</p>
+        </div>
+    </div>
+
+    <!-- Página 2 -->
+    <div id="page2">
+        <div class="floating" id="hearts2"></div>
+        <div class="vignette"></div>
+        <div class="container">
+            <div class="big-heart" style="font-size: 8.5rem; animation-duration: 1s;">❤️</div>
+            
+            <h1 style="font-size: 4.6rem; margin-top: 20px;">O ANTHONY</h1>
+            <h1 style="font-size: 4.1rem; margin-top: -15px;">NÃO TE QUER MAIS</h1>
+            
+            <p style="font-size: 2.35rem; font-weight: 700; margin: 40px 0 25px;">
+                Ele cansou de você.
+            </p>
+            
+            <p>Seguiu em frente, deletou as fotos, bloqueou e nunca mais olhou pra trás.</p>
+            
+            <p style="font-size: 2rem; margin-top: 55px; color: #ffcccc;">
+                E você aí, achando que ele ainda pensa em ti kkkkk
+            </p>
+        </div>
+    </div>
+
+    <script>
+        // Corações flutuantes com mais variação
+        function createHeart(containerId) {
+            const container = document.getElementById(containerId);
+            const heart = document.createElement('div');
+            
+            heart.textContent = ['❤️','💔','🖕','☠️','🖤'][Math.floor(Math.random() * 5)];
+            heart.style.position = 'absolute';
+            heart.style.fontSize = Math.random() * 3.2 + 2.2 + 'rem';
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.top = '-120px';
+            heart.style.opacity = Math.random() * 0.75 + 0.35;
+            heart.style.zIndex = '2';
+            container.appendChild(heart);
+
+            const duration = Math.random() * 9 + 11;
+            heart.style.transition = `all ${duration}s cubic-bezier(0.4, 0, 1, 1)`;
+
+            setTimeout(() => {
+                heart.style.top = '110vh';
+                heart.style.transform = `rotate(${Math.random() * 2200}deg)`;
+            }, 80);
+
+            setTimeout(() => heart.remove(), duration * 1000 + 3000);
+        }
+
+        // Inicia corações em ambas as páginas
+        setInterval(() => createHeart('hearts1'), 130);
+        setInterval(() => createHeart('hearts2'), 155);
+
+        // Clique no coração
+        document.getElementById('clickHeart').addEventListener('click', function() {
+            this.style.transform = 'scale(4.5) rotate(45deg)';
+            this.style.opacity = '0';
+            this.style.filter = 'blur(10px)';
+
+            // Explosão de partículas detalhada
+            for (let i = 0; i < 140; i++) {
+                setTimeout(() => {
+                    const particle = document.createElement('div');
+                    particle.textContent = ['🖕','💔','😂','☠️','🖤'][Math.floor(Math.random()*5)];
+                    particle.style.position = 'fixed';
+                    particle.style.left = Math.random() * 100 + 'vw';
+                    particle.style.top = Math.random() * 80 + 'vh';
+                    particle.style.fontSize = Math.random() * 2.8 + 2 + 'rem';
+                    particle.style.zIndex = '100';
+                    document.body.appendChild(particle);
+
+                    setTimeout(() => {
+                        particle.style.transition = 'all 3.8s cubic-bezier(0.4, 0, 1, 1)';
+                        particle.style.top = '120vh';
+                        particle.style.opacity = '0';
+                        particle.style.transform = `rotate(${Math.random() * 2500}deg)`;
+                    }, 40);
+                }, i * 4);
+            }
+
+            // Troca de página
+            setTimeout(() => {
+                document.getElementById('page1').style.opacity = '0';
+                setTimeout(() => {
+                    document.getElementById('page1').style.display = 'none';
+                    document.getElementById('page2').style.display = 'flex';
+                }, 1200);
+            }, 700);
+        });
+    </script>
+</body>
+</html>
